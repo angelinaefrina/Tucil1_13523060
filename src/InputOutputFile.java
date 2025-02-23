@@ -57,29 +57,35 @@ public class InputOutputFile {
                 puzzle_blocks.add(convertBlockToMatrix(block));
             }
             
-            System.out.println("Huruf Unik: " + huruf_blocks.size());
+            // System.out.println("Huruf Unik: " + huruf_blocks.size());
             // reader.close();
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
 
-        return new Puzzle(N, M, P, S, puzzle_blocks);
+        return new Puzzle(N, M, P, S, puzzle_blocks, huruf_blocks);
     }
 
     public static char[][] convertBlockToMatrix(List<String> block) {
         int baris = block.size();
-        int kolom = block.get(0).length();
+        int kolom = 0;
+        for (String line : block) {
+            kolom = Math.max(kolom, line.length());
+        }
         char[][] matriks = new char[baris][kolom];
         for (int i = 0; i < baris; i++) {
-            matriks[i] = block.get(i).toCharArray();
+            String line = block.get(i);
+            for (int j = 0; j < kolom; j++) {
+                matriks[i][j] = (j < line.length()) ? line.charAt(j) : ' ';
+            }
         }
         return matriks;
     }
 
-    public static void outputFile(char[][] solusi, String filenames){
+    public static void outputFile(char[][] papan, String filenames){
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filenames))) {
-            for (char[] baris : solusi) {
+            for (char[] baris : papan) {
                 writer.write(baris);
                 writer.newLine();
             }
@@ -87,31 +93,5 @@ public class InputOutputFile {
             System.out.println("error!");
         }
     }
-
-    public static void main(String[] args) {
-        // Puzzle puzzle = bacaFilePuzzle("test/testcase1.txt");
-        // System.out.println("N = " + puzzle.N);
-        // System.out.println("M = " + puzzle.M);
-        // System.out.println("P = " + puzzle.P);
-        // System.out.println("S = " + puzzle.S);
-        
-        // System.out.println("Puzzle Blocks:");
-        // for (char[][] block : puzzle.puzzle_blocks) {
-        //     for (char[] baris : block) {
-        //         System.out.println(new String(baris));
-        //     }
-        //     System.out.println();
-        // }
-
-        // char[][] puzzle_board = {
-        //     {'A', 'G', 'G', 'G', 'D'},
-        //     {'A', 'A', 'B', 'D', 'D'},
-        //     {'C', 'C', 'B', 'B', 'F'},
-        //     {'C', 'E', 'E', 'F', 'F'},
-        //     {'E', 'E', 'E', 'F', 'F'}
-        // };
-        // outputFile(puzzle_board, "test/output.txt");
-    }
-
 
 }
