@@ -238,11 +238,14 @@ public class PuzzleSolver {
 
         Solusi solusi = solvePuzzleByBruteForce(puzzle.papan, puzzle.puzzle_blocks, puzzle.huruf_blocks);
         long end_time = System.currentTimeMillis();
+        System.out.println();
         System.out.println("Waktu pencarian: " + (end_time - start_time) + " ms");
+        System.out.println();
 
         if (solusi.is_solved) {
             System.out.println("Puzzle solved! Yay :D");
             // printPapan(solusi.papan);
+            System.out.println();
             Solusi.printSolusiBerwarna(solusi.papan, puzzle.huruf_blocks);
             System.out.println();
 
@@ -251,14 +254,19 @@ public class PuzzleSolver {
             Scanner scanner = new Scanner(System.in);
             String save_solusi = scanner.nextLine();
             if (save_solusi.equals("ya")) {
-                InputOutputFile.outputFile(solusi.papan, "test/solusi1.txt");
+                InputOutputFile.outputFile(solusi.papan, "test/solution/solusi1.txt");
+            }
+            System.out.println();
+            System.out.println("Apakah anda ingin menyimpan hasilnya sebagai gambar? (ya/tidak)");
+            String save_gambar = scanner.nextLine();
+            if (save_gambar.equals("ya")) {
+                InputOutputFile.generateGambarSolusi(solusi.papan, "test/solution/pic/solusi1.png");
             }
             
         } else {
-            System.out.println("Puzzle cannot be solved! Try again.");
+            System.out.println("Puzzle cannot be solved! Good luck next time.");
         }
 
-        
     }
     
 }

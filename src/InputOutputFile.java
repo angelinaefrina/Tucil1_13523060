@@ -1,5 +1,9 @@
+import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.*;
 import java.util.*;
+import java.util.List;
+import javax.imageio.ImageIO;
 
 public class InputOutputFile {
     
@@ -93,5 +97,75 @@ public class InputOutputFile {
             System.out.println("error!");
         }
     }
+
+    public static final String[] WARNA_HEX = {
+        "#FFFFFF", // Putih.
+        "#A6A6A6", // Abu-Abu.
+        "#FF3131", // Merah.
+        "#FF914C", // Oranye.
+        "#FFDE59", // Kuning.
+        "#7ED956", // Hijau Muda.
+        "#00BF62", // Hijau.
+        "#0CC1E0", // Biru Muda.
+        "#004AAD", // Biru Tua.
+        "#FF65C3", // Pink.
+        "#8C52FF", // Ungu.
+        "#FF5757", // Terracotta.
+        "#F0FFA2", // Kuning Pucat.
+        "#FEBD59", // Kuning Tua.
+        "#944912", // Coklat.
+        "#C0FF72", // Lime.
+        "#00892A", // Hijau Tua.
+        "#5CE1E6", // Cyan.
+        "#0097B2", // Turqoise.
+        "#38B6FF", // Biru Langit.
+        "#5271FF", // Indigo.
+        "#F539FF", // Magenta.
+        "#F0AFFF", // Lavender.
+        "#CB6BE6", // Violet.
+        "#5D17EB", // Ungu Tua.
+        "#800000"  // Maroon.
+    };
+    
+    public static final String WARNA_DEFAULT_HEX = "#000000";
+    
+    public static String getWarna(char huruf_block) {
+        if (huruf_block == ' ') {
+                return WARNA_DEFAULT_HEX;
+            }
+            int indeks = huruf_block - 'A';
+            if (indeks >= 0 && indeks < WARNA_HEX.length) {
+                return WARNA_HEX[indeks];
+            }
+            return WARNA_DEFAULT_HEX;
+        }
+    
+    public static void generateGambarSolusi(char[][] papan, String filename) {
+        int ukuran = 50;
+        int panjang = papan.length * ukuran;
+        int lebar = papan[0].length * ukuran;
+        BufferedImage image = new BufferedImage(lebar, panjang, BufferedImage.TYPE_INT_RGB);
+        Graphics2D g = image.createGraphics();
+
+        for (int i = 0; i < papan.length; i++) {
+            for (int j = 0; j < papan[i].length; j++) {
+                String hexColor = getWarna(papan[i][j]);
+                g.setColor(Color.decode(hexColor));
+                g.fillRect(j * ukuran, i * ukuran, ukuran, ukuran);
+                g.setColor(Color.BLACK); // warna outline
+                g.drawRect(j * ukuran, i * ukuran, ukuran, ukuran);
+                g.drawString(String.valueOf(papan[i][j]), j * ukuran + 20, i * ukuran + 30);
+            }
+        }
+
+        g.dispose();
+        try {
+            ImageIO.write(image, "png", new File(filename));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
 
 }
