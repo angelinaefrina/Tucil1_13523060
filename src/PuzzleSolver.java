@@ -47,6 +47,18 @@ public class PuzzleSolver {
     }    
 
     // Mencerminkan block puzzle
+    public static char[][] mirrorBlock(char[][] block) {
+        int panjang_block = block.length;
+        int lebar_block = block[0] .length;
+        char[][] mirrored = new char[panjang_block][lebar_block];
+
+        for (int i = 0; i < panjang_block; i++) {
+            for (int j = 0; j < lebar_block; j++) {
+                mirrored[i][j] = block[i][lebar_block - 1 - j];
+            }
+        }
+        return mirrored;
+    }
 
     // Menaruh block puzzle pada papan
     public static char[][] placeBlock(char[][] papan, char[][] block, int x, int y) {
@@ -164,6 +176,7 @@ public class PuzzleSolver {
             }
 
             char[][] original_block = puzzle_blocks.get(indeks);
+            char[][] mirrored_block = mirrorBlock(original_block);
             int N = current_papan.length;
             int M = current_papan[0].length;
 
@@ -177,6 +190,16 @@ public class PuzzleSolver {
                             // System.out.println();
                             stack.push(new PapanPuzzle(new_papan, indeks + 1, cases));
                         }
+                        current_block = rotateBlock(current_block);
+                        cases++;
+                    }
+
+                    current_block = mirrored_block;
+                    for (int r = 0; r < 4; r++) {
+                        if (canBlockFit(current_papan, current_block, i, j)) {
+                            char[][] new_papan = placeBlock(current_papan, current_block, i, j);
+                            stack.push(new PapanPuzzle(new_papan, indeks + 1, cases));
+                    }
                         current_block = rotateBlock(current_block);
                         cases++;
                     }
