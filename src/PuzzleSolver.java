@@ -215,7 +215,8 @@ public class PuzzleSolver {
     public static void main(String[] args) {
         long start_time = System.currentTimeMillis();
 
-        Puzzle puzzle = InputOutputFile.bacaFilePuzzle("test/testcase1.txt");
+        String input_filename = InputOutputFile.inputFile();
+        Puzzle puzzle = InputOutputFile.bacaFilePuzzle(input_filename);
         // System.out.println("N = " + puzzle.N);
         // System.out.println("M = " + puzzle.M);
         // System.out.println("P = " + puzzle.P);
@@ -250,17 +251,28 @@ public class PuzzleSolver {
             System.out.println();
 
             System.out.println("Banyak kasus yang ditinjau: " + solusi.count);
+            System.out.println();
+
+            // Prompt menyimpan hasil
             System.out.println("Apakah anda ingin menyimpan hasilnya? (ya/tidak)");
             Scanner scanner = new Scanner(System.in);
             String save_solusi = scanner.nextLine();
             if (save_solusi.equals("ya")) {
-                InputOutputFile.outputFile(solusi.papan, "test/solution/solusi1.txt");
+                System.out.println("Masukkan nama file untuk menyimpan hasil: ");
+                String output_filename = scanner.nextLine();
+                InputOutputFile.outputFile(solusi.papan, "test/solution/" + output_filename + ".txt");
+                System.out.println("Solusi berhasil disimpan pada test/solution!");
             }
             System.out.println();
+
+            // Prompt menyimpan gambar
             System.out.println("Apakah anda ingin menyimpan hasilnya sebagai gambar? (ya/tidak)");
             String save_gambar = scanner.nextLine();
             if (save_gambar.equals("ya")) {
-                InputOutputFile.generateGambarSolusi(solusi.papan, "test/solution/pic/solusi1.png");
+                System.out.println("Masukkan nama file untuk menyimpan gambar: ");
+                String output_filename = scanner.nextLine();
+                InputOutputFile.generateGambarSolusi(solusi.papan, "test/solution/pic/" + output_filename + ".png");
+                System.out.println("Gambar berhasil disimpan pada test/solution/pic!");
             }
             
         } else {

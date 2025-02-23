@@ -7,6 +7,34 @@ import javax.imageio.ImageIO;
 
 public class InputOutputFile {
     
+    // Meminta input file .txt
+    public static String inputFile(){
+        System.out.println("SELAMAT DATANG DI IQ PUZZLE PRO SOLVER!");
+
+        Scanner scanner = new Scanner(System.in);
+        String filename;
+        File file;
+
+        while (true) {
+            System.out.println("Masukkan nama file .txt (pastikan file ada pada folder test): ");
+            filename = scanner.nextLine().trim();
+            if (filename.isEmpty()) {
+                System.out.println("Nama file tidak boleh kosong! Coba lagi.");
+                continue;
+            }
+            file = new File("test/" + filename + ".txt");
+            if (!file.exists()) {
+                System.out.println("File tidak ditemukan pada folder test! Coba lagi.");
+                continue;
+            } else {
+                break;
+            }
+        }
+        
+        return ("test/" + filename + ".txt");
+        
+    }
+    
     // Membaca masukan file .txt
     public static Puzzle bacaFilePuzzle(String file_name) {
         int N = 0, M = 0, P = 0;
