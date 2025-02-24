@@ -9,7 +9,10 @@ public class InputOutputFile {
     
     // Meminta input file .txt
     public static String inputFile(){
-        System.out.println("SELAMAT DATANG DI IQ PUZZLE PRO SOLVER!");
+        System.out.println("=========================================");
+        System.out.println("SELAMAT DATANG DI IQ PUZZLER PRO SOLVER!");
+        System.out.println("=========================================");
+        System.out.println();
 
         Scanner scanner = new Scanner(System.in);
         String filename;
@@ -34,7 +37,7 @@ public class InputOutputFile {
         return ("test/" + filename + ".txt");
         
     }
-    
+
     // Membaca masukan file .txt
     public static Puzzle bacaFilePuzzle(String file_name) {
         int N = 0, M = 0, P = 0;
@@ -99,6 +102,7 @@ public class InputOutputFile {
         return new Puzzle(N, M, P, S, puzzle_blocks, huruf_blocks);
     }
 
+    // Mengubah block puzzle menjadi matriks untuk disimpan dalam sebuah list
     public static char[][] convertBlockToMatrix(List<String> block) {
         int baris = block.size();
         int kolom = 0;
@@ -115,6 +119,7 @@ public class InputOutputFile {
         return matriks;
     }
 
+    // Menulis output file berupa .txt
     public static void outputFile(char[][] papan, String filenames){
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filenames))) {
             for (char[] baris : papan) {
@@ -157,6 +162,7 @@ public class InputOutputFile {
     
     public static final String WARNA_DEFAULT_HEX = "#000000";
     
+    // Mendapatkan warna block puzzle berdasarkan huruf block puzzle
     public static String getWarna(char huruf_block) {
         if (huruf_block == ' ') {
                 return WARNA_DEFAULT_HEX;
@@ -168,6 +174,7 @@ public class InputOutputFile {
             return WARNA_DEFAULT_HEX;
         }
     
+    // Menghasilkan gambar dari solusi dan menyimpannya
     public static void generateGambarSolusi(char[][] papan, String filename) {
         int ukuran = 50;
         int panjang = papan.length * ukuran;

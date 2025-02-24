@@ -155,7 +155,7 @@ public class PuzzleSolver {
         return true;
     }
 
-    // Mencari solusi dari puzzle
+    // Mencari solusi dari puzzle dengan brute force
     public static Solusi solvePuzzleByBruteForce(char[][] papan, List<char[][]> puzzle_blocks, HashSet<Character> huruf_blocks) {
         Stack<PapanPuzzle> stack = new Stack<>();
         stack.push(new PapanPuzzle(papan, 0, 0));
@@ -170,6 +170,7 @@ public class PuzzleSolver {
 
             if (indeks >= puzzle_blocks.size()) {
                 if (isPapanPenuh(current_papan)) {
+                    //printPapan(current_papan);
                     return new Solusi(current_papan, true, cases);
                 }
                 continue;
@@ -213,36 +214,24 @@ public class PuzzleSolver {
 
 
     public static void main(String[] args) {
-        long start_time = System.currentTimeMillis();
-
+        
+        // Meminta input file
         String input_filename = InputOutputFile.inputFile();
         Puzzle puzzle = InputOutputFile.bacaFilePuzzle(input_filename);
-        // System.out.println("N = " + puzzle.N);
-        // System.out.println("M = " + puzzle.M);
-        // System.out.println("P = " + puzzle.P);
-        // System.out.println("S = " + puzzle.S);
-        
-        // System.out.println("Puzzle Blocks:");
-        // for (char[][] block : puzzle.puzzle_blocks) {
-        //     for (char[] baris : block) {
-        //         System.out.println(new String(baris));
-        //     }
-        //     System.out.println();
-        // }
 
-        // char[][] papan = new char[puzzle.N][puzzle.M];
-        // for (int i = 0; i < puzzle.N; i++) {
-        //     for (int j = 0; j < puzzle.M; j++) {
-        //         papan[i][j] = ' ';
-        //     }
-        // }
+        // Mencari solusi puzzle dengan brute force
+        long start_time = System.currentTimeMillis();
 
         Solusi solusi = solvePuzzleByBruteForce(puzzle.papan, puzzle.puzzle_blocks, puzzle.huruf_blocks);
+
         long end_time = System.currentTimeMillis();
+
+        // Menampilkan waktu pencarian
         System.out.println();
         System.out.println("Waktu pencarian: " + (end_time - start_time) + " ms");
         System.out.println();
 
+        // Menampilkan hasil
         if (solusi.is_solved) {
             System.out.println("Puzzle solved! Yay :D");
             // printPapan(solusi.papan);

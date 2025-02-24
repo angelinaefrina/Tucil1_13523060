@@ -42,6 +42,7 @@ public class Solusi {
 
     public static final String WARNA_DEFAULT = "\u001B[0m";
 
+    // Mendapatkan warna block puzzle berdasarkan huruf block puzzle
     public static String getWarna(char huruf_block) {
         if (huruf_block == ' ') {
             return WARNA_DEFAULT;
@@ -50,6 +51,7 @@ public class Solusi {
         return WARNA[indeks];
     }
 
+    // Menampilkan solusi berupa papan dengan block puzzle berwarna
     public static void printSolusiBerwarna(char[][] papan, HashSet<Character> huruf_blocks) {
         for (char[] baris : papan) {
             for (char huruf_block : baris) {
