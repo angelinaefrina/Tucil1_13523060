@@ -8,7 +8,7 @@ Oleh: Angelina Efrina Prahastaputri - 13523060
 Program ini merupakan salah satu tugas kecil dari mata kuliah IF2211 Strategi Algoritma. Tucil ini dibuat dengan bahasa Java. Program ini bertujuan untuk mencari penyelesaikan dari permainan IQ Puzzler Pro dengan menggunakan pendekatan algoritma *brute force*. IQ Puzzler Pro adalah permainan teka-teki logika yang dibuat oleh SmartGames, yaitu sebuah perusahaan yang terkenal dengan berbagai permainan puzzle logika yang menantang. Pengguna akan dimintai input oleh program berupa file *.txt* yang berisi bagian-bagian puzzle yang harus diselesaikan. Kemudian, program akan mencari solusi menggunakan algoritma *brute force* dan menampilkan hasilnya.
 
 ## Requirement Program dan Instalasi Tertentu:
-**1.** Terminal lokal(cmd) atau VSCode.  
+**1.** Terminal lokal(cmd) atau Visual Studio Code.  
 **2.** Java sudah terinstall di sistem. Anda dapat memeriksa di terminal lokal dengan cara
 ```
 java -version
@@ -29,6 +29,7 @@ java -version
   **6.** Jalankan program menggunakan perintah
   ```
   javac -d bin src/InputOutputFile.java src/PapanPuzzle.java src/Puzzle.java src/PuzzleSolver.java src/Solusi.java
+  ...
 
   java -cp bin PuzzleSolver
   ```
