@@ -1,0 +1,17 @@
+6 5 6
+DEFAULT
+ZZZZ
+ Z  
+Y  
+YYY
+ Y 
+X X
+XXX
+WW 
+WWW
+VVV
+ V 
+UU
+ U
+UU
+ U
