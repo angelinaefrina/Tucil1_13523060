@@ -29,8 +29,8 @@ java -version
   **6.** Jalankan program menggunakan perintah
   ```
   javac -d bin src/InputOutputFile.java src/PapanPuzzle.java src/Puzzle.java src/PuzzleSolver.java src/Solusi.java
-  ...
-
+  ```
+  ```
   java -cp bin PuzzleSolver
   ```
   **7.** Ikuti prompt yang muncul untuk memasukkan input nama file yang berisi konfigurasi permainan.   
